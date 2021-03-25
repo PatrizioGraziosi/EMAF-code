@@ -14,18 +14,16 @@
 % ----------------------------------------------------------------------- %
 
 
-function Data_from_bxsf(fileName,num_of_bands,num_of_points,num_elements_each_row)
+function Data_from_bxsf(fileName,num_of_bands,num_of_points,num_lines_to_skip,num_elements_each_row)
 
-inputFile = strcat(fileName);
-fid = fopen(inputFile);
+inputFile=strcat(fileName);
+fid=fopen(inputFile);
 
-% formatSpec = '%f';
 
-num_lines_to_skip = 19; % number of line to be skipped in order to get the first ilne of energy values, 19 is the typical values in bsxf files
+% num_lines_to_skip = 19; % number of line to be skipped in order to get the first ilne of energy values, 19 is the typical values in bsxf files
 % skip the lines
-for i = 1:(num_lines_to_skip-4)
-    temp = fgetl(fid);
-%     A = fscanf(fid,formatSpec);
+for i=1:(num_lines_to_skip-4)
+    temp=fgetl(fid);
 end
 % the a, b, c vectors that ate in from 3 to 1 lines above the number of
 % lines to skip
@@ -38,7 +36,11 @@ c = str2num(temp);
 %
 temp = fgetl(fid); % thus we arrive to the num_line_to_skip
 
-num_lines_to_read = floor(num_of_points/num_elements_each_row)+1;
+if rem(num_of_points,num_elements_each_row) ~= 0
+    num_lines_to_read = floor(num_of_points/num_elements_each_row)+1;
+elseif rem(num_of_points,num_elements_each_row) == 0
+    num_lines_to_read = floor(num_of_points/num_elements_each_row);
+end
 
 for id_band = 1:num_of_bands
     if id_band == 1
