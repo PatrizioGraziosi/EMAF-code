@@ -13,7 +13,7 @@
 %                                                                         %
 % ----------------------------------------------------------------------- %
 
-function bxsf_to_ELECTRA(fileName,material_name,alat,reduce_flag) %codegen
+function bxsf_to_EMAF(fileName,material_name,alat,reduce_flag) %codegen
 if strcmp(reduce_flag,'y')
     reduce_SOC = 'SOC_not_magn';
 end
