@@ -16,6 +16,8 @@
 function bxsf_to_EMAF(fileName,material_name,alat,reduce_flag) %codegen
 if strcmp(reduce_flag,'y')
     reduce_SOC = 'SOC_not_magn';
+else
+    reduce_SOC = 'n';
 end
 % if nk_new == 0
 %     bands_interpolation =   'no'; % if you wants numerical bands interpolation, it uses griddata for sparse points
